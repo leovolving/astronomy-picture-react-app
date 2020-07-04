@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DateForm, MediaViewer } from '.';
 
-const API_KEY = process.env.REACT_APP_API_KEY || 'DEMO_KEY';
+const API_KEY = process.env.REACT_APP_API_KEY || 'ua9vSa2iPHaEtzmR69B0EnKu7ZfZnemGQkD5nyxR';
 
 export default () => {
     const [date, setDate] = useState(null);
@@ -23,8 +23,13 @@ export default () => {
         }
     }, [date]);
 
-    return ( date && !errorMessage
-        ? <MediaViewer data={data} onClose={setDate} />
-        : <DateForm callback={setDate} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
+    return ( 
+        <main>
+            <section className='card'>
+                {date && !errorMessage
+                ? <MediaViewer data={data} onClose={setDate} />
+                : <DateForm callback={setDate} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}
+            </section>
+        </main>
     );
 }

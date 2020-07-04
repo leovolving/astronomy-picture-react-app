@@ -23,9 +23,10 @@ const renderMonthOption = month => (
 
 export default ({onChange, value}) => (
     <Fragment>
-        <label htmlFor='month'>Month</label>
-        <select onChange={onChange} id='month' name='month' value={value}>
-            {months.map(renderMonthOption)}
-        </select>
+        <label>Month
+            <select onChange={onChange} name='month' value={value}>
+                {months.map(renderMonthOption)}
+            </select>
+        </label>
     </Fragment>
 );

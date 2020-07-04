@@ -60,26 +60,30 @@ export default ({callback, errorMessage, setErrorMessage}) => {
                 <legend>Select a date between June 16, 1995 and today.</legend>
                 
                 {errorMessage && <p><strong>{errorMessage}</strong></p>}
+
+                <div className='input-container'>
                 
-                <Month onChange={onChange} value={month} />
+                    <Month onChange={onChange} value={month} />
 
-                <RangedSelect
-                    name='day'
-                    onChange={onChange}
-                    range={[1, 31]}
-                    renderRangedOptions={renderRangedOptions}
-                    value={day}
-                />
+                    <RangedSelect
+                        name='day'
+                        onChange={onChange}
+                        range={[1, 31]}
+                        renderRangedOptions={renderRangedOptions}
+                        value={day}
+                    />
 
-                <RangedSelect
-                    name='year'
-                    onChange={onChange}
-                    range={[1995, currentYear]}
-                    renderRangedOptions={renderRangedOptions}
-                    value={year}
-                />
+                    <RangedSelect
+                        name='year'
+                        onChange={onChange}
+                        range={[1995, currentYear]}
+                        renderRangedOptions={renderRangedOptions}
+                        value={year}
+                    />
 
-                <input type='submit' value='View' />
+                    <input type='submit' value='View' />
+
+                </div>
                 
             </fieldset>
         </form>
