@@ -25,7 +25,7 @@ export default ({callback}) => {
     const today = new Date();
     const currentYear = today.getFullYear();
     const [year, setYear] = useState(currentYear);
-    const [month, setMonth] = useState(to2DigitString(today.getMonth()));
+    const [month, setMonth] = useState(to2DigitString(today.getMonth()+1));
     const [day, setDay] = useState(to2DigitString(today.getDate()));
 
     // callbacks
