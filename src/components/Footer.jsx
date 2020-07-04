@@ -4,9 +4,7 @@ export default () => (
     <footer>
         <p>
             Source: {' '}
-            <a href="https://apod.nasa.gov/apod/astropix.html">
-                NASA Astronomy Picture of the Day
-                </a>
+            <a href="https://apod.nasa.gov/apod/astropix.html">NASA</a>
         </p>
         <p>
             Built By {' '}

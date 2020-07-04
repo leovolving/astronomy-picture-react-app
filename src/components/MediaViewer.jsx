@@ -10,10 +10,10 @@ export default ({data, onClose}) => {
             <div>
                 <h2>{data.title}</h2>
                 {data.media_type === 'image'
-                    ? <img src={data.url} alt={'photo of ' + data.title} />
-                    : <p>Media is a video (not an image). Feature coming soon! Go back and try another date to view an image</p>
+                    ? <img style={{width: '100vw'}} src={data.url} alt={'photo of ' + data.title} />
+                    : <iframe title={data.title} src={data.url} frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
                 }
-                <p>{data.description}</p>
+                <p>{data.explanation}</p>
                 <p>&copy; {data.copyright}</p>
             </div>
     </Fragment>

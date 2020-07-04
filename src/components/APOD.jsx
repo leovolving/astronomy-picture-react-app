@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DateForm, PhotoViewer } from '.';
+import { DateForm, MediaViewer } from '.';
 
 const API_KEY = process.env.API_KEY || 'DEMO_KEY';
 
@@ -14,15 +14,17 @@ export default () => {
     }
 
     useEffect(() => {
-        const url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${date}`;
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", onRequestSuccess);
-        xhr.open('GET', url);
-        xhr.send();
+        if (date) {
+            const url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${date}`;
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", onRequestSuccess);
+            xhr.open('GET', url);
+            xhr.send();
+        }
     }, [date]);
 
     return ( date && !errorMessage
-        ? <PhotoViewer data={data} onClose={setDate} />
+        ? <MediaViewer data={data} onClose={setDate} />
         : <DateForm callback={setDate} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
     );
 }
