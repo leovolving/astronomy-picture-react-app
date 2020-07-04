@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DateForm, MediaViewer } from '.';
 
-const API_KEY = process.env.API_KEY || 'DEMO_KEY';
+const API_KEY = process.env.REACT_APP_API_KEY || 'DEMO_KEY';
 
 export default () => {
     const [date, setDate] = useState(null);
