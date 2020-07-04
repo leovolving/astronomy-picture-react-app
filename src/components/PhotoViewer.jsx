@@ -1,40 +1,21 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
 
-const API_KEY = process.env.API_KEY || 'DEMO_KEY';
-
-export default ({date, onClose}) => {
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState();
+export default ({data, onClose}) => {
 
     const onClick = () => onClose(null);
-
-    const onRequestSuccess = res => {
-        setData(JSON.parse(res.currentTarget.response));
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        const url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${date}`;
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", onRequestSuccess);
-        xhr.open('GET', url);
-        xhr.send();
-    }, [date]);
 
     return (
         <Fragment>
             <button onClick={onClick}>Back</button>
-            {!isLoading && (
-                <div>
-                    <h2>{data.title}</h2>
-                    {data.media_type === 'image'
-                        ? <img src={data.url} alt={'photo of ' + data.title} />
-                        : <p>Media is a video (not an image). Feature coming soon! Go back and try another date to view an image</p>
-                    }
-                    <p>{data.description}</p>
-                    <p>&copy; {data.copyright}</p>
-                </div>
-            )}
-        </Fragment>
+            <div>
+                <h2>{data.title}</h2>
+                {data.media_type === 'image'
+                    ? <img src={data.url} alt={'photo of ' + data.title} />
+                    : <p>Media is a video (not an image). Feature coming soon! Go back and try another date to view an image</p>
+                }
+                <p>{data.description}</p>
+                <p>&copy; {data.copyright}</p>
+            </div>
+    </Fragment>
     );
 }

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { Month, RangedSelect } from './form';
+import moment from 'moment';
+
+const today = new Date();
+const todayMoment = moment();
+const beginningDateMoment = moment('1995-06-15');
 
 // helpers
 
@@ -20,16 +25,15 @@ const to2DigitString = n => ('0' + n).slice(-2);
 
 // component
 
-export default ({callback}) => {
+export default ({callback, errorMessage, setErrorMessage}) => {
     // setup state
-    const today = new Date();
     const currentYear = today.getFullYear();
     const [year, setYear] = useState(currentYear);
     const [month, setMonth] = useState(to2DigitString(today.getMonth()+1));
     const [day, setDay] = useState(to2DigitString(today.getDate()));
 
     // callbacks
-    const onChange = (event) => {
+    const onChange = event => {
         const hooks = {
             year: setYear,
             month: setMonth,
@@ -39,8 +43,14 @@ export default ({callback}) => {
         hooks[name](value);
     } 
 
-    const onSubmit = () => {
-        callback(`${year}-${month}-${day}`);
+    const onSubmit = event => {
+        event.preventDefault();
+        const date = `${year}-${month}-${day}`;
+        const dateMoment = moment(date);
+        const outOfRange = dateMoment.isBefore(beginningDateMoment) || dateMoment.isAfter(todayMoment);
+
+        if (outOfRange) setErrorMessage('Date must be between June 16, 1995 and today.');
+        else callback(date);
     }
 
     // component
@@ -48,6 +58,8 @@ export default ({callback}) => {
         <form onSubmit={onSubmit}>
             <fieldset>
                 <legend>Select a date between June 16, 1995 and today.</legend>
+                
+                {errorMessage && <p><strong>{errorMessage}</strong></p>}
                 
                 <Month onChange={onChange} value={month} />
 
